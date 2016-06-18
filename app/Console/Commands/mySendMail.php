@@ -28,8 +28,10 @@ class mySendMail extends Command {
     public function handle() {
 
         \Mail::send('emails.sellhouse', [], function($message) {
-            $message->to('raherediag@gmail.com', 'Roberto A. Heredia');
-            $message->subject('Test');
+            $message->to('comercioonline@googlegroups.com', 'comercioonline');
+            $message->to('las-avispas@googlegroups.com', 'las-avispas');
+            $message->cc('raherediag@gmail.com', 'Roberto A. Heredia');
+            $message->subject('Se vende Apartamento en el Distrito "Jose Martí" Santiago de Cuba');
         });
 
         $this->info('Email was sent.');

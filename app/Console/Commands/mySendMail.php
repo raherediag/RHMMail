@@ -28,7 +28,7 @@ class mySendMail extends Command {
     public function handle() {
 
         \Mail::send('emails.sellhouse', [], function($message) {
-            $message->to('raherediag@gmail.com', 'Roberto A. Heredia')->subject('Test');
+            $message->to('raherediag@gmail.com', 'Roberto A. Heredia');
             $message->subject('Test');
         });
 

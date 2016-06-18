@@ -26,8 +26,10 @@ class mySendMail extends Command {
      * @return mixed
      */
     public function handle() {
-        Mail::send('emails.sellhouse', [], function($message) {
+
+        \Mail::send('emails.sellhouse', [], function($message) {
             $message->to('raherediag@gmail.com', 'Roberto A. Heredia')->subject('Test');
+            $message->subject('Test');
         });
 
         $this->info('Email was sent.');

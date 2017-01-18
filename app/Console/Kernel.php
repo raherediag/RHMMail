@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel {
      */
     protected $commands = [
         Commands\mySendMail::class,
+        Commands\myQuakeChecker::class,
             // Commands\Inspire::class,
     ];
 
@@ -26,6 +27,7 @@ class Kernel extends ConsoleKernel {
     protected function schedule(Schedule $schedule) {
         // $schedule->command('inspire')
         //          ->hourly();
+         $schedule->command('myQuakeChecker')->hourly();
 //        $schedule->command('mySendMail')->everyMinute();
     }
 

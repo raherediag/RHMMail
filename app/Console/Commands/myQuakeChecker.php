@@ -29,7 +29,7 @@ class myQuakeChecker extends Command {
     public function handle() {
 
         $cenais = ['latest', 'one', 'two', 'three'];
-        $last_quake = head(mQuake::where('from', 'cenais')->orderby('date', 'ASC')->take(1)->get()->toArray());
+        $last_quake = head(mQuake::where('from', 'cenais')->orderby('date', 'DESC')->take(1)->get()->toArray());
 
         if ($last_quake == false) {
             $last_quake['time'] = strtotime('-7 day');
@@ -63,7 +63,9 @@ class myQuakeChecker extends Command {
                         'mag' => \helper::getValue($quake, 'magnitud', '0'),
                         'from' => \helper::getValue($quake, 'from', 'cenais'),
                         'description' => \helper::getValue($quake, 'desc', ''),
-                        'date' => \helper::getValue($quake, 'timeUTC', date('Y-m-d h:i:s'))
+                        'date' => \helper::getValue($quake, 'timeUTC', date('Y-m-d h:i:s')),
+                        'created_at' => date('Y-m-d h:i:s', strtotime('-5 hours')),
+                        'updated_at' => date('Y-m-d h:i:s', strtotime('-5 hours'))
                     ];
                     if (\helper::getValue($quake, 'magnitud', '0') > 3 && (\helper::getValue($quake, 'lat', '0.00') > 18.6 && \helper::getValue($quake, 'lat', '0.00') < 21) && (\helper::getValue($quake, 'lon', '0.00') > -78.5 && \helper::getValue($quake, 'lon', '0.00') < -73)) {
                         $adv[] = [
@@ -89,16 +91,8 @@ class myQuakeChecker extends Command {
                 $message->to('raherediag@gmail.com', 'Roberto A. Heredia');
                 $message->subject('Quake warning');
             });
+            $this->info('Email was sent.');
         }
-
-
-
-
-
-
-
-
-        $this->info('Email was sent.');
     }
 
 }

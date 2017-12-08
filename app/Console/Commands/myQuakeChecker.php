@@ -5,7 +5,8 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Models\quakes\quakes as mQuake;
 
-class myQuakeChecker extends Command {
+class myQuakeChecker extends Command
+{
 
     /**
      * The name and signature of the console command.
@@ -19,15 +20,15 @@ class myQuakeChecker extends Command {
      *
      * @var string
      */
-    protected $description = 'My Quake Checker';
+    protected $description = 'Earthquake Checker';
 
     /**
      * Execute the console command.
      *
      * @return mixed
      */
-    public function handle() {
-
+    public function handle()
+    {
         $cenais = ['latest', 'one', 'two', 'three'];
         $last_quake = head(mQuake::where('from', 'cenais')->orderby('date', 'DESC')->take(1)->get()->toArray());
 
@@ -42,6 +43,10 @@ class myQuakeChecker extends Command {
             $this->info('Receive information from Cenais with ' . $query . ' parameter');
             $res = json_decode(\helper::apiCall('http://www.cenais.cu/lastquake/php/service.php', ['service' => $query], 'GET'), true);
 
+            if (!is_array($res)) {
+                continue;
+            }
+            
             $this->info('Processing information');
             foreach ($res as $quake) {
                 if (\helper::getValue($quake, 'lon', '') == '' && \helper::getValue($quake, 'lat', '') == '') {
@@ -64,8 +69,8 @@ class myQuakeChecker extends Command {
                         'from' => \helper::getValue($quake, 'from', 'cenais'),
                         'description' => \helper::getValue($quake, 'desc', ''),
                         'date' => \helper::getValue($quake, 'timeUTC', date('Y-m-d h:i:s')),
-                        'created_at' => date('Y-m-d h:i:s', strtotime('-5 hours')),
-                        'updated_at' => date('Y-m-d h:i:s', strtotime('-5 hours'))
+                        'created_at' => date('Y-m-d h:i:s'),
+                        'updated_at' => date('Y-m-d h:i:s')
                     ];
                     if (\helper::getValue($quake, 'magnitud', '0') > 3 && (\helper::getValue($quake, 'lat', '0.00') > 18.6 && \helper::getValue($quake, 'lat', '0.00') < 21) && (\helper::getValue($quake, 'lon', '0.00') > -78.5 && \helper::getValue($quake, 'lon', '0.00') < -73)) {
                         $adv[] = [
@@ -87,12 +92,11 @@ class myQuakeChecker extends Command {
         }
 
         if (count($adv) > 0) {
-            \Mail::send('emails.quake_warning', ['contents' => ['quakes' => $adv]], function($message) {
+            \Mail::send('emails.quake_warning', ['contents' => ['quakes' => $adv]], function ($message) {
                 $message->to('raherediag@gmail.com', 'Roberto A. Heredia');
                 $message->subject('Quake warning');
             });
             $this->info('Email was sent.');
         }
     }
-
 }

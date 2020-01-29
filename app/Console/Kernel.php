@@ -28,6 +28,6 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('myQuakeChecker')->everyTenMinutes();
-        $schedule->command('mySendMail')->cron('0 */3 * * *');
+        //$schedule->command('mySendMail')->cron('0 */3 * * *');
     }
 }

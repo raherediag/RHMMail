@@ -28,46 +28,6 @@ class mySendMail extends Command
      */
     public function handle()
     {
-        \Mail::send('emails.sellTemplates.splitRoyal', [], function ($message) {
-            $message->to('comercioonline@googlegroups.com', 'comercioonline');
-            $message->to('las-avispas@googlegroups.com', 'las-avispas');
-            // $message->cc('raherediag@gmail.com', 'Roberto A. Heredia');
-            $message->subject('Se vende Split ROYAL 1Tn 220v a 600 CUC en la Habana');
-        });
-        \Log::info('Email Split ROYAL was sent.');
-
-        \Mail::send('emails.sellTemplates.lavadora', [], function ($message) {
-            $message->to('comercioonline@googlegroups.com', 'comercioonline');
-            $message->to('las-avispas@googlegroups.com', 'las-avispas');
-            // $message->cc('raherediag@gmail.com', 'Roberto A. Heredia');
-            $message->subject('Se vende Lavadora LG 8.6 Kg a 500 CUC en la Habana en la Habana');
-        });
-        \Log::info('Email Lavadora LG 8.6 Kg was sent.');
-
-        \Mail::send('emails.sellTemplates.cocina', [], function ($message) {
-            $message->to('comercioonline@googlegroups.com', 'comercioonline');
-            $message->to('las-avispas@googlegroups.com', 'las-avispas');
-            // $message->cc('raherediag@gmail.com', 'Roberto A. Heredia');
-            $message->subject('Se vende Cocina ROYAL Gas 4Q con Horno a 280 CUC en la Habana');
-        });
-        \Log::info('Email Cocina ROYAL Gas was sent.');
-
-        \Mail::send('emails.sellTemplates.lijadora', [], function ($message) {
-            $message->to('comercioonline@googlegroups.com', 'comercioonline');
-            $message->to('las-avispas@googlegroups.com', 'las-avispas');
-            // $message->cc('raherediag@gmail.com', 'Roberto A. Heredia');
-            $message->subject('Se vende Lijadoras 220w STANLEY a 100 CUC en la Habana');
-        });
-        \Log::info('Email Lijadoras 220w STANLEY was sent.');
-        
-        \Mail::send('emails.sellTemplates.electrodomesticos', [], function ($message) {
-            $message->to('comercioonline@googlegroups.com', 'comercioonline');
-            $message->to('las-avispas@googlegroups.com', 'las-avispas');
-            // $message->cc('raherediag@gmail.com', 'Roberto A. Heredia');
-            $message->subject('Se venden Split, Lavadora, Cocina y Lijadoras en la Habana');
-        });
-        \Log::info('Email electrodomesticos was sent.');
-        
         \Mail::send('emails.sellTemplates.reello', [], function ($message) {
             $message->to('comercioonline@googlegroups.com', 'comercioonline');
             $message->to('las-avispas@googlegroups.com', 'las-avispas');

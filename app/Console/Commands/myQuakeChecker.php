@@ -29,6 +29,9 @@ class myQuakeChecker extends Command
      */
     public function handle()
     {
+        echo "Start Earthquake Checker";
+        \Log::info('Start Earthquake Checker');
+
         $cenais = ['latest', 'one', 'two', 'three'];
         $last_quake = head(mQuake::where('from', 'cenais')->orderby('date', 'DESC')->take(1)->get()->toArray());
 
@@ -46,7 +49,7 @@ class myQuakeChecker extends Command
             if (!is_array($res)) {
                 continue;
             }
-            
+
             $this->info('Processing information');
             foreach ($res as $quake) {
                 if (\helper::getValue($quake, 'lon', '') == '' && \helper::getValue($quake, 'lat', '') == '') {
@@ -98,5 +101,7 @@ class myQuakeChecker extends Command
             });
             $this->info('Email was sent.');
         }
+        \Log::info('End Earthquake Checker');
+        echo "End Earthquake Checker";
     }
 }

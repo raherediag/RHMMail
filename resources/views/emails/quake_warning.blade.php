@@ -20,19 +20,19 @@ and open the template in the editor.
                     <th>Longitude</th>
                     <th>Magnitude</th>
                     <th>Depth</th>
-                    <th>From</th>
+                    <th>Provider</th>
                     <th>Description</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($contents['quakes'] as $quake)
                 <tr>
-                    <td>{{date('M j, Y, h:i:s',strtotime($quake['date']))}}</td>
+                    <td>{{date('M j, Y, h:i:s A',(strtotime($quake['date']) - 500*36))}}</td>
                     <td>{{$quake['lat']}}</td>
                     <td>{{$quake['lng']}}</td>
                     <td>{{$quake['mag']}}</td>
                     <td>{{$quake['depth']}}</td>
-                    <td>{{$quake['from']}}</td>
+                    <td>{{$quake['provider']}}</td>
                     <td>{{$quake['description']}}</td>
                 </tr>
                 @endforeach

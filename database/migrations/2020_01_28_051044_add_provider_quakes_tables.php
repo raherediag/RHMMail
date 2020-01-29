@@ -14,7 +14,8 @@ class AddProviderQuakesTables extends Migration
     {
         Schema::table('quakes', function (Blueprint $table) {
             \DB::statement("ALTER TABLE `quakes` CHANGE COLUMN `from` `provider` VARCHAR(255) NOT NULL COLLATE 'utf8_unicode_ci' AFTER `mag`;");
-            $table->string('provider_id')->nullable()->after('provider');
+            $table->string('provider_id')->nullable()->index()->after('provider');
+            $table->tinyInteger('sent')->nullable()->default(0)->after('date');
         });
     }
 
@@ -26,6 +27,7 @@ class AddProviderQuakesTables extends Migration
     public function down()
     {
         Schema::table('quakes', function (Blueprint $table) {
+            $table->dropColumn('sent');
             $table->dropColumn('provider_id');
             \DB::statement("ALTER TABLE `quakes` CHANGE COLUMN `provider` `from` VARCHAR(255) NOT NULL COLLATE 'utf8_unicode_ci' AFTER `mag`;");
         });

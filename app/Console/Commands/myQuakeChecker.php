@@ -202,7 +202,5 @@ class myQuakeChecker extends Command
 
             $features = mQuake::whereIn('id',$adv)->update(['sent' => 1]);
         }
-        \Log::info('End Earthquake Checker');
-        echo "End Earthquake Checker";
     }
 }

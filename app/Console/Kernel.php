@@ -16,6 +16,8 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\mySendMail::class,
         Commands\myQuakeChecker::class,
+        Commands\testPipe::class,
+        Commands\testCallCommands::class,
             // Commands\Inspire::class,
     ];
 

@@ -60,10 +60,10 @@ class myQuakeChecker extends Command
         $rows = [];
         
         $this->info('Receive information from Cenais');
-        $res = json_decode(cHelper::apiCall('http://www.cenais.cu/lastquake/php/lastweek.php', [], 'GET'), true);
+        $res = json_decode(cHelper::apiCall('http://www.cenais.cu/lastquake/php/lastweek.php?days=2', [], 'GET'), true);
 
         if (!is_array($res)) {
-            continue;
+            return;
         }
 
         $this->info('Processing information');
